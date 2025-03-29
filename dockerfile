@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     zip \
     unzip \
-    libpq-dev \   # ✅ Agrega esta línea para instalar PostgreSQL dev
+    libpq-dev \
     && docker-php-ext-install gd pdo pdo_mysql pdo_pgsql
 
 # Instalar Composer
