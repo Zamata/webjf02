@@ -20,13 +20,13 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'nullable|email'
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
         ]);
 
-        Contact::create($request->all());
+        Contact::create($data);
         return redirect()->route('contacts.index');
     }
 
@@ -37,13 +37,13 @@ class ContactController extends Controller
 
     public function update(Request $request, Contact $contact)
     {
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'nullable|email'
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
         ]);
 
-        $contact->update($request->all());
+        $contact->update($data);
         return redirect()->route('contacts.index');
     }
 

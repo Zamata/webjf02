@@ -34,6 +34,8 @@ COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 # Exponer el puerto 80
 EXPOSE 80
 
+RUN composer dump-autoload
+
 # 🚀 **Comando de inicio: correr migraciones y ejecutar Apache**
 CMD php artisan config:cache && \
     php artisan route:cache && \
