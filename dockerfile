@@ -34,5 +34,11 @@ COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 # Exponer el puerto 80
 EXPOSE 80
 
-# 🚀 **Ejecutar migraciones automáticamente**
-CMD php artisan migrate --force && apache2-foreground
+# 🚀 **Comando de inicio: correr migraciones y ejecutar Apache**
+CMD php artisan config:cache && \
+    php artisan route:cache && \
+    php artisan view:cache && \
+    php artisan migrate --force && \
+    php artisan storage:link && \
+    apache2-foreground
+
