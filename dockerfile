@@ -21,7 +21,7 @@ COPY . .
 # Instalar dependencias
 RUN composer install --no-dev --optimize-autoloader
 
-# 💡 Crear las carpetas necesarias para evitar el error de cache
+# 💡 Crear las carpetas necesarias
 RUN mkdir -p storage/framework/cache && \
     mkdir -p storage/framework/sessions && \
     mkdir -p storage/framework/views && \
@@ -34,5 +34,5 @@ COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando de inicio
-CMD ["apache2-foreground"]
+# 🚀 **Ejecutar migraciones automáticamente**
+CMD php artisan migrate --force && apache2-foreground
