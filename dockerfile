@@ -21,8 +21,11 @@ COPY . .
 # Instalar dependencias
 RUN composer install --no-dev --optimize-autoloader
 
-# Dar permisos a storage y bootstrap/cache
-RUN chmod -R 777 storage bootstrap/cache
+# 💡 Crear las carpetas necesarias para evitar el error de cache
+RUN mkdir -p storage/framework/cache && \
+    mkdir -p storage/framework/sessions && \
+    mkdir -p storage/framework/views && \
+    chmod -R 777 storage bootstrap/cache
 
 # Configurar Apache
 RUN a2enmod rewrite
